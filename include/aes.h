@@ -4,9 +4,9 @@
 class CAESEncryption
 {
 public:
-   CAESEncryption(const uint8_t* Key ) noexcept;
-   void EncryptBlock(const uint8_t* Input, uint8_t* Output) const noexcept;
-   void DecryptBlock(const uint8_t* Input, uint8_t* Output) const noexcept;
+   constexpr CAESEncryption(const uint8_t* Key ) noexcept;
+   constexpr void EncryptBlock(const uint8_t* Input, uint8_t* Output) const noexcept;
+   constexpr void DecryptBlock(const uint8_t* Input, uint8_t* Output) const noexcept;
 
 private:
    static constexpr size_t block_size = 16;

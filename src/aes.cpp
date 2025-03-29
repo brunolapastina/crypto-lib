@@ -43,7 +43,7 @@ static constexpr uint8_t SBoxInv[256] =
 };
 
 
-#define  SignExpand(a)     (static_cast<uint8_t>((static_cast<int8_t>(a) >> 7)))
+constexpr uint8_t SignExpand(uint8_t a) { return static_cast<uint8_t>((static_cast<int8_t>(a) >> 7)); }
 
 /*// This is the generic way to multiply in the Galois field
 static __inline uint8_t GMul(uint8_t a, uint8_t b)
@@ -103,7 +103,7 @@ static constexpr __inline uint8_t GMulBy0x0E(const uint8_t b)
 }
 
 
-CAESEncryption::CAESEncryption(const uint8_t* Key) noexcept
+constexpr CAESEncryption::CAESEncryption(const uint8_t* Key) noexcept
 {
    uint8_t  Rcon = 0x01;
 
@@ -139,7 +139,7 @@ CAESEncryption::CAESEncryption(const uint8_t* Key) noexcept
    }
 }
 
-void CAESEncryption::EncryptBlock(const uint8_t* Input, uint8_t* Output) const noexcept
+constexpr void CAESEncryption::EncryptBlock(const uint8_t* Input, uint8_t* Output) const noexcept
 {
    uint8_t  ss[block_size];
    const uint8_t* wint = (const uint8_t*)&w[0];
@@ -213,7 +213,7 @@ void CAESEncryption::EncryptBlock(const uint8_t* Input, uint8_t* Output) const n
    Output[ 3] = SBox[tmp1] ^ wint[3];
 }
 
-void CAESEncryption::DecryptBlock(const uint8_t* Input, uint8_t* Output) const noexcept
+constexpr void CAESEncryption::DecryptBlock(const uint8_t* Input, uint8_t* Output) const noexcept
 {
    uint8_t  ss[block_size];
    const uint8_t* wint = (const uint8_t*)&w[num_of_rounds*block_size];
